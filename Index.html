@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Presupuesto Importacion Jugueteria 2026 - Microbell S.A.</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--navy:#1e2d5a;--navy2:#2a3f7e;--gold:#f5a623;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--bg:#f0f4ff;--white:#ffffff;--gray:#64748b;--light:#e8edf8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:#1e293b;font-size:13px;}
+a{color:var(--navy2);}
+.header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#3b5bdb 100%);color:#fff;padding:28px 36px 22px;display:flex;align-items:center;justify-content:space-between;}
+.header h1{font-size:21px;font-weight:700;}
+.header h1 span{color:var(--gold);}
+.header .meta{text-align:right;font-size:11px;opacity:.85;line-height:1.9;}
+.logo-box{font-size:30px;font-weight:900;color:var(--gold);margin-right:16px;}
+.container{max-width:1700px;margin:0 auto;padding:24px 20px;}
+.section{background:var(--white);border-radius:12px;box-shadow:0 2px 12px rgba(30,45,90,.09);padding:24px;margin-bottom:24px;}
+.section h2{font-size:15px;color:var(--navy);font-weight:700;padding-bottom:10px;border-bottom:2px solid var(--light);margin-bottom:18px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
+.card{background:var(--light);border-radius:10px;padding:16px;text-align:center;border-left:4px solid var(--navy2);}
+.card.c-green{border-color:var(--green);background:#f0fdf4;}
+.card.c-yellow{border-color:var(--yellow);background:#fffbeb;}
+.card.c-red{border-color:var(--red);background:#fef2f2;}
+.card .bnum{font-size:28px;font-weight:800;color:var(--navy);}
+.card.c-green .bnum{color:#15803d;}
+.card.c-yellow .bnum{color:#b45309;}
+.card.c-red .bnum{color:#b91c1c;}
+.card .blabel{font-size:11px;color:var(--gray);margin-top:4px;line-height:1.5;}
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:11.5px;}
+thead th{background:var(--navy);color:#fff;padding:8px 5px;text-align:center;position:sticky;top:0;white-space:nowrap;font-size:10.5px;}
+tbody tr:nth-child(even){background:#fafbff;}
+tbody tr:hover{background:#eef2ff;}
+td{padding:7px 5px;border-bottom:1px solid #e8edf8;vertical-align:middle;}
+.center{text-align:center;}
+.num{text-align:right;font-variant-numeric:tabular-nums;}
+.fob-act{font-weight:700;color:var(--navy2);}
+.highlight-dep{background:#dbeafe!important;font-weight:800;color:var(--navy);}
+.price-meli{font-weight:700;color:#0ea5e9;}
+.recup{color:#7c3aed;font-size:10.5px;}
+.pos{color:var(--red);font-weight:700;}
+.neg{color:var(--green);font-weight:700;}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;white-space:nowrap;}
+.verde{background:#dcfce7;color:#166534;}
+.amarillo{background:#fef9c3;color:#854d0e;}
+.rojo{background:#fee2e2;color:#991b1b;}
+.row-verde td{background:rgba(34,197,94,.04);}
+.row-rojo td{background:rgba(239,68,68,.06);}
+.link-btn{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-decoration:none;margin:1px 0;}
+.link-btn.ali{background:#ff6a00;color:#fff;}
+.link-btn.meli{background:#3483fa;color:#fff;}
+.cat-tag{background:var(--light);color:var(--navy2);padding:1px 6px;border-radius:10px;font-size:10px;}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.chart-box{background:var(--light);border-radius:10px;padding:16px;}
+.chart-box h3{font-size:12px;color:var(--navy);font-weight:700;margin-bottom:12px;}
+.rec-card{border-radius:8px;padding:14px;margin-bottom:10px;border-left:4px solid;}
+.rec-amarillo{background:#fffbeb;border-color:var(--yellow);}
+.rec-rojo{background:#fef2f2;border-color:var(--red);}
+.rec-head{font-weight:700;font-size:13px;margin-bottom:6px;}
+.rec-body p{font-size:12px;color:#374151;margin:3px 0;}
+.note{background:#eff6ff;border-left:4px solid #3b82f6;padding:10px 14px;border-radius:6px;font-size:11.5px;color:#1e40af;margin-top:12px;}
+.cost-formula{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:14px;background:var(--light);border-radius:10px;font-size:12px;}
+.cost-step{background:var(--white);border:2px solid var(--navy2);border-radius:6px;padding:6px 10px;text-align:center;min-width:100px;}
+.cost-step .cs-val{font-size:15px;font-weight:900;color:var(--navy);}
+.cost-step .cs-desc{font-size:9px;color:var(--gray);}
+.cost-arrow{font-size:16px;color:var(--navy2);font-weight:900;}
+.cost-final{background:var(--navy);color:#fff;border-radius:6px;padding:6px 12px;text-align:center;min-width:120px;}
+.cost-final .cs-val{font-size:16px;font-weight:900;color:var(--gold);}
+.footer{text-align:center;color:var(--gray);font-size:10.5px;padding:20px;line-height:1.7;}
+@media print{.header{background:#1e2d5a!important;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div style="display:flex;align-items:center;">
+    <div class="logo-box">M</div>
+    <div>
+      <div style="font-size:22px;font-weight:900;">MICROBELL <span style="color:#f5a623;">S.A.</span></div>
+      <div style="font-size:11px;opacity:.75;">Importadora Mayorista</div>
+    </div>
+  </div>
+  <div style="flex:1;text-align:center;padding:0 20px;">
+    <h1>Presupuesto de Importacion &mdash; <span>Jugueteria Dia del Nino 2026</span></h1>
+    <div style="font-size:11px;opacity:.8;margin-top:5px;">Top 30 articulos &middot; Costeo completo &middot; Comparativo MeLi &middot; Semaforos competitivos</div>
+  </div>
+  <div class="meta">
+    <div><strong>Fecha:</strong> 31 de Marzo 2026</div>
+    <div><strong>TC:</strong> 1 U$S = $1,475</div>
+    <div><strong>Ref. ventas:</strong> Mar&ndash;Ago 2025</div>
+    <div><strong>Fuentes:</strong> MeLi &middot; Nubimetrics &middot; Alibaba</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- RESUMEN EJECUTIVO -->
+<div class="section">
+<h2>&#128202; Resumen Ejecutivo</h2>
+<div class="cards">
+  <div class="card"><div class="bnum">30</div><div class="blabel">Articulos analizados<br>Top ventas Dia del Nino</div></div>
+  <div class="card c-green"><div class="bnum">9</div><div class="blabel">&#127922; VERDE<br>Competitivos &mdash; Publicar ya</div></div>
+  <div class="card c-yellow"><div class="bnum">20</div><div class="blabel">&#127921; AMARILLO<br>Ajustar FOB o margen</div></div>
+  <div class="card c-red"><div class="bnum">1</div><div class="blabel">&#128308; ROJO<br>No competitivo</div></div>
+  <div class="card"><div class="bnum">20%</div><div class="blabel">Arancel DIE juguetes<br>Decreto 781/2025</div></div>
+  <div class="card"><div class="bnum">x7,65</div><div class="blabel">Multiplicador FOB<br>hasta Precio MeLi</div></div>
+  <div class="card"><div class="bnum">16 Ago</div><div class="blabel">Dia del Nino 2026<br>Fecha objetivo venta</div></div>
+  <div class="card" style="border-color:#f59e0b;background:#fffbeb;"><div class="bnum" style="color:#b45309;font-size:20px;">GOLD</div><div class="blabel">Objetivo nivel MeLi<br>mantener categoria</div></div>
+</div>
+</div>
+
+<!-- ESTRUCTURA DE COSTOS -->
+<div class="section">
+<h2>&#127959; Estructura de Costos de Importacion &mdash; Argentina 2026 (NCM Cap. 9503)</h2>
+<div class="cost-formula">
+  <div class="cost-step"><div class="cs-val">FOB</div><div class="cs-desc">Precio fabrica China</div></div>
+  <div class="cost-arrow">&#215;1,07</div>
+  <div class="cost-step"><div class="cs-val">FOB Act.</div><div class="cs-desc">+7% ajuste</div></div>
+  <div class="cost-arrow">+13%+0,5%</div>
+  <div class="cost-step"><div class="cs-val">CIF</div><div class="cs-desc">+Flete+Seguro</div></div>
+  <div class="cost-arrow">+Nac.</div>
+  <div class="cost-step" style="background:#dbeafe;border-color:#3b82f6;"><div class="cs-val">Val.Dep.</div><div class="cs-desc">Valor en Deposito</div></div>
+  <div class="cost-arrow">&#215;1,35</div>
+  <div class="cost-step"><div class="cs-val">Costo Merc.</div><div class="cs-desc">+Costo Operativo</div></div>
+  <div class="cost-arrow">&#215;1,45</div>
+  <div class="cost-step"><div class="cs-val">P.Mayorista</div><div class="cs-desc">Margen 45%</div></div>
+  <div class="cost-arrow">&#215;1,80</div>
+  <div class="cost-final"><div class="cs-val">Precio MeLi</div><div class="cs-desc" style="color:#e5e7eb;font-size:9px;">Precio publicacion</div></div>
+</div>
+
+<table style="margin-top:18px;max-width:850px;">
+<thead>
+<tr><th>Componente</th><th>Base</th><th>%</th><th>Tipo</th><th>Norma</th></tr>
+</thead>
+<tbody>
+<tr><td>Flete Maritimo China-ARG</td><td>FOB Actualizado</td><td>13,0%</td><td>No recuperable</td><td>Tarifa naviera por ruta</td></tr>
+<tr><td>Seguro Maritimo</td><td>FOB Actualizado</td><td>0,5%</td><td>No recuperable</td><td>Poliza de carga</td></tr>
+<tr><td><strong>Derecho Importacion (DIE)</strong></td><td>CIF</td><td><strong>20,0%</strong></td><td>No recuperable</td><td><strong>Decreto 781/2025 &mdash; NCM 9503 (baj. de 35%)</strong></td></tr>
+<tr><td>Tasa Estadistica</td><td>CIF</td><td>3,0%</td><td>No recuperable</td><td>Decreto 108/2023</td></tr>
+<tr><td>Gastos Aduana/Despachante</td><td>CIF</td><td>1,5%</td><td>No recuperable</td><td>Honorarios profesionales</td></tr>
+<tr style="background:#f5f3ff;"><td>IVA Importacion</td><td>CIF x 1,23</td><td>21,0%</td><td><em>Recuperable</em></td><td>AFIP Res. 549/2000</td></tr>
+<tr style="background:#f5f3ff;"><td>IVA Adicional</td><td>CIF x 1,23</td><td>10,5%</td><td><em>Recuperable</em></td><td>AFIP</td></tr>
+<tr style="background:#f5f3ff;"><td>Percepcion Ganancias</td><td>CIF x 1,23</td><td>6,0%</td><td><em>Recuperable</em></td><td>RG AFIP 2281</td></tr>
+<tr style="background:#f5f3ff;"><td>Percepcion IIBB</td><td>CIF x 1,23</td><td>3,0%</td><td><em>P. Recuperable</em></td><td>Agente perc. provincial</td></tr>
+<tr><td>Deposito Fiscal</td><td>CIF</td><td>2,5%</td><td>No recuperable</td><td>Tarifa deposito aduanero</td></tr>
+<tr><td>Flete a Deposito Microbell</td><td>CIF</td><td>2,0%</td><td>No recuperable</td><td>Logistica terrestre</td></tr>
+<tr style="font-weight:700;background:var(--light);"><td colspan="2">TOTAL SOBRE CIF</td><td>78,8%</td><td></td><td></td></tr>
+</tbody>
+</table>
+<div class="note">&#9888; Los items <em>Recuperables</em> (IVA, Ganancias, IIBB) son creditos fiscales acreditables contra IVA ventas y anticipos impositivos. Se incluyen en Valor Deposito por impacto en capital de trabajo. El multiplicador x1,35 (Costo Operativo) absorbe estructura empresarial y el costo financiero del recupero de estos creditos.</div>
+</div>
+
+<!-- TABLA PRINCIPAL -->
+<div class="section">
+<h2>&#128203; Top 30 Articulos &mdash; Tabla Completa de Costeo con Semaforos</h2>
+<div class="note" style="margin-bottom:12px;">Precios FOB: cotizaciones Alibaba 2025 (estimados por rango mayorista). Precios mercado MeLi: relevamiento marzo 2026. TC: 1 U$S = $1,475 ARS. Todos los valores en U$S salvo indicacion.</div>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>#</th><th style="min-width:200px;">Articulo / Categoria</th><th>MOQ</th>
+<th>FOB<br>U$S</th><th>FOB Act.<br>x1,07</th><th>CIF</th>
+<th>Costos<br>Import.</th><th>Val.<br>Deposito</th>
+<th>Costo Merc.<br>x1,35</th><th>P.Mayorista<br>x1,45</th>
+<th>Precio<br>MeLi x1,80</th><th>Mercado<br>MeLi Actual</th>
+<th>Dif.%</th><th>Semaforo</th><th>Links</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-verde"><td class="center">1</td><td><strong>Auto RC 1:18 4WD con Luces LED</strong><br><small class="cat-tag">Electrónico/RC</small></td><td class="center">100</td><td class="num">U$S 7.50</td><td class="num fob-act">U$S 8.03</td><td class="num">U$S 9.11</td><td class="num">U$S 7.18</td><td class="num highlight-dep">U$S 16.29</td><td class="num">U$S 21.99</td><td class="num">U$S 31.88</td><td class="num price-meli">U$S 57.39<br><small>$84,647</small></td><td class="num">U$S 59.66<br><small>$88,000</small></td><td class="num neg">-3.8%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/rc-cars-price-in-china.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/juguetes/autos-control-remoto" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">2</td><td><strong>Helicóptero RC 4 Canales con Giroscopio</strong><br><small class="cat-tag">Electrónico/RC</small></td><td class="center">100</td><td class="num">U$S 5.50</td><td class="num fob-act">U$S 5.89</td><td class="num">U$S 6.68</td><td class="num">U$S 5.26</td><td class="num highlight-dep">U$S 11.94</td><td class="num">U$S 16.12</td><td class="num">U$S 23.38</td><td class="num price-meli">U$S 42.08<br><small>$62,074</small></td><td class="num">U$S 42.03<br><small>$62,000</small></td><td class="num pos">+0.1%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/remote-control-toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/helicoptero-control-remoto" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">3</td><td><strong>Drone Mini Plegable para Niños</strong><br><small class="cat-tag">Electrónico/RC</small></td><td class="center">100</td><td class="num">U$S 6.80</td><td class="num fob-act">U$S 7.28</td><td class="num">U$S 8.26</td><td class="num">U$S 6.51</td><td class="num highlight-dep">U$S 14.77</td><td class="num">U$S 19.94</td><td class="num">U$S 28.91</td><td class="num price-meli">U$S 52.03<br><small>$76,747</small></td><td class="num">U$S 53.56<br><small>$79,000</small></td><td class="num neg">-2.9%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/remote-control-toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/drone-mini-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">4</td><td><strong>Robot Interactivo Programable Educativo</strong><br><small class="cat-tag">Electrónico/RC</small></td><td class="center">50</td><td class="num">U$S 12.00</td><td class="num fob-act">U$S 12.84</td><td class="num">U$S 14.57</td><td class="num">U$S 11.49</td><td class="num highlight-dep">U$S 26.06</td><td class="num">U$S 35.18</td><td class="num">U$S 51.01</td><td class="num price-meli">U$S 91.82<br><small>$135,435</small></td><td class="num">U$S 80.00<br><small>$118,000</small></td><td class="num pos">+14.8%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/electronic-blocks-toy.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/robot-interactivo-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">5</td><td><strong>Bloques Magnéticos Construcción 100 Piezas</strong><br><small class="cat-tag">Construcción</small></td><td class="center">100</td><td class="num">U$S 8.50</td><td class="num fob-act">U$S 9.10</td><td class="num">U$S 10.32</td><td class="num">U$S 8.14</td><td class="num highlight-dep">U$S 18.46</td><td class="num">U$S 24.92</td><td class="num">U$S 36.13</td><td class="num price-meli">U$S 65.04<br><small>$95,933</small></td><td class="num">U$S 64.41<br><small>$95,000</small></td><td class="num pos">+1.0%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/magnetic-blocks-toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://juegos-juguetes.mercadolibre.com.ar/juguetes/bloques-magneticos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">6</td><td><strong>Bloques Encastre 200 Piezas + Ruedas</strong><br><small class="cat-tag">Construcción</small></td><td class="center">200</td><td class="num">U$S 5.00</td><td class="num fob-act">U$S 5.35</td><td class="num">U$S 6.07</td><td class="num">U$S 4.79</td><td class="num highlight-dep">U$S 10.86</td><td class="num">U$S 14.66</td><td class="num">U$S 21.25</td><td class="num price-meli">U$S 38.26<br><small>$56,431</small></td><td class="num">U$S 35.93<br><small>$53,000</small></td><td class="num pos">+6.5%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/electronic-blocks-toy.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/bloques-construccion-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">7</td><td><strong>Set STEM Engranajes y Construcción 60 Pzas</strong><br><small class="cat-tag">Construcción</small></td><td class="center">200</td><td class="num">U$S 4.50</td><td class="num fob-act">U$S 4.82</td><td class="num">U$S 5.47</td><td class="num">U$S 4.31</td><td class="num highlight-dep">U$S 9.77</td><td class="num">U$S 13.19</td><td class="num">U$S 19.13</td><td class="num price-meli">U$S 34.43<br><small>$50,788</small></td><td class="num">U$S 29.15<br><small>$43,000</small></td><td class="num pos">+18.1%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/electronic-blocks-toy.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/juguetes-educativos-stem" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">8</td><td><strong>Peluche Kawaii Tipo Labubu 25cm</strong><br><small class="cat-tag">Peluche</small></td><td class="center">200</td><td class="num">U$S 3.50</td><td class="num fob-act">U$S 3.75</td><td class="num">U$S 4.25</td><td class="num">U$S 3.35</td><td class="num highlight-dep">U$S 7.60</td><td class="num">U$S 10.26</td><td class="num">U$S 14.88</td><td class="num price-meli">U$S 26.78<br><small>$39,502</small></td><td class="num">U$S 30.51<br><small>$45,000</small></td><td class="num neg">-12.2%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/peluche-labubu" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">9</td><td><strong>Peluche Baby Shark 30cm con Sonido</strong><br><small class="cat-tag">Peluche</small></td><td class="center">200</td><td class="num">U$S 4.20</td><td class="num fob-act">U$S 4.49</td><td class="num">U$S 5.10</td><td class="num">U$S 4.02</td><td class="num highlight-dep">U$S 9.12</td><td class="num">U$S 12.31</td><td class="num">U$S 17.85</td><td class="num price-meli">U$S 32.14<br><small>$47,402</small></td><td class="num">U$S 35.93<br><small>$53,000</small></td><td class="num neg">-10.6%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/peluche-baby-shark" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">10</td><td><strong>Muñeca Bebé Reborn 49cm + Accesorios</strong><br><small class="cat-tag">Muñecas</small></td><td class="center">100</td><td class="num">U$S 5.50</td><td class="num fob-act">U$S 5.89</td><td class="num">U$S 6.68</td><td class="num">U$S 5.26</td><td class="num highlight-dep">U$S 11.94</td><td class="num">U$S 16.12</td><td class="num">U$S 23.38</td><td class="num price-meli">U$S 42.08<br><small>$62,074</small></td><td class="num">U$S 42.03<br><small>$62,000</small></td><td class="num pos">+0.1%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/muneca-bebe-reborn" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">11</td><td><strong>Casa Muñecas Plegable + 30 Accesorios</strong><br><small class="cat-tag">Muñecas</small></td><td class="center">50</td><td class="num">U$S 14.00</td><td class="num fob-act">U$S 14.98</td><td class="num">U$S 17.00</td><td class="num">U$S 13.40</td><td class="num highlight-dep">U$S 30.40</td><td class="num">U$S 41.04</td><td class="num">U$S 59.51</td><td class="num price-meli">U$S 107.12<br><small>$158,008</small></td><td class="num">U$S 96.95<br><small>$143,000</small></td><td class="num pos">+10.5%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/casa-munecas-plegable" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">12</td><td><strong>Figura Acción Superhéroe 30cm Articulada</strong><br><small class="cat-tag">Figuras</small></td><td class="center">200</td><td class="num">U$S 3.80</td><td class="num fob-act">U$S 4.07</td><td class="num">U$S 4.61</td><td class="num">U$S 3.64</td><td class="num highlight-dep">U$S 8.25</td><td class="num">U$S 11.14</td><td class="num">U$S 16.15</td><td class="num price-meli">U$S 29.08<br><small>$42,888</small></td><td class="num">U$S 27.12<br><small>$40,000</small></td><td class="num pos">+7.2%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/figuras-accion-superheroes" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">13</td><td><strong>Set Dinosaurios 12 Figuras Realistas</strong><br><small class="cat-tag">Figuras</small></td><td class="center">200</td><td class="num">U$S 4.50</td><td class="num fob-act">U$S 4.82</td><td class="num">U$S 5.47</td><td class="num">U$S 4.31</td><td class="num highlight-dep">U$S 9.77</td><td class="num">U$S 13.19</td><td class="num">U$S 19.13</td><td class="num price-meli">U$S 34.43<br><small>$50,788</small></td><td class="num">U$S 35.25<br><small>$52,000</small></td><td class="num neg">-2.3%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/set-dinosaurios-figuras" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">14</td><td><strong>Set Animales Granja 12 Figuras</strong><br><small class="cat-tag">Figuras</small></td><td class="center">200</td><td class="num">U$S 3.20</td><td class="num fob-act">U$S 3.42</td><td class="num">U$S 3.89</td><td class="num">U$S 3.06</td><td class="num highlight-dep">U$S 6.95</td><td class="num">U$S 9.38</td><td class="num">U$S 13.60</td><td class="num price-meli">U$S 24.49<br><small>$36,116</small></td><td class="num">U$S 24.07<br><small>$35,500</small></td><td class="num pos">+1.7%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/set-animales-granja" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">15</td><td><strong>Jenga Madera Natural 54 Piezas XL</strong><br><small class="cat-tag">Juegos Mesa</small></td><td class="center">200</td><td class="num">U$S 3.20</td><td class="num fob-act">U$S 3.42</td><td class="num">U$S 3.89</td><td class="num">U$S 3.06</td><td class="num highlight-dep">U$S 6.95</td><td class="num">U$S 9.38</td><td class="num">U$S 13.60</td><td class="num price-meli">U$S 24.49<br><small>$36,116</small></td><td class="num">U$S 21.02<br><small>$31,000</small></td><td class="num pos">+16.5%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/jenga-madera" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">16</td><td><strong>Juego Memoria Cartas 48 Pares Educativo</strong><br><small class="cat-tag">Juegos Mesa</small></td><td class="center">300</td><td class="num">U$S 2.20</td><td class="num fob-act">U$S 2.35</td><td class="num">U$S 2.67</td><td class="num">U$S 2.11</td><td class="num highlight-dep">U$S 4.78</td><td class="num">U$S 6.45</td><td class="num">U$S 9.35</td><td class="num price-meli">U$S 16.83<br><small>$24,830</small></td><td class="num">U$S 15.25<br><small>$22,500</small></td><td class="num pos">+10.4%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/juego-memoria-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">17</td><td><strong>Puzzle 100 Piezas Personajes Infantiles</strong><br><small class="cat-tag">Juegos Mesa</small></td><td class="center">300</td><td class="num">U$S 2.00</td><td class="num fob-act">U$S 2.14</td><td class="num">U$S 2.43</td><td class="num">U$S 1.91</td><td class="num highlight-dep">U$S 4.34</td><td class="num">U$S 5.86</td><td class="num">U$S 8.50</td><td class="num price-meli">U$S 15.30<br><small>$22,573</small></td><td class="num">U$S 13.22<br><small>$19,500</small></td><td class="num pos">+15.8%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/puzzle-100-piezas-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">18</td><td><strong>Set Cocina Infantil 15 Accesorios</strong><br><small class="cat-tag">Imitación</small></td><td class="center">100</td><td class="num">U$S 6.50</td><td class="num fob-act">U$S 6.96</td><td class="num">U$S 7.89</td><td class="num">U$S 6.22</td><td class="num highlight-dep">U$S 14.12</td><td class="num">U$S 19.06</td><td class="num">U$S 27.63</td><td class="num price-meli">U$S 49.74<br><small>$73,361</small></td><td class="num">U$S 44.07<br><small>$65,000</small></td><td class="num pos">+12.9%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/cocina-juguete-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">19</td><td><strong>Set Herramientas Infantil Madera 10 Pzas</strong><br><small class="cat-tag">Imitación</small></td><td class="center">200</td><td class="num">U$S 4.50</td><td class="num fob-act">U$S 4.82</td><td class="num">U$S 5.47</td><td class="num">U$S 4.31</td><td class="num highlight-dep">U$S 9.77</td><td class="num">U$S 13.19</td><td class="num">U$S 19.13</td><td class="num price-meli">U$S 34.43<br><small>$50,788</small></td><td class="num">U$S 30.17<br><small>$44,500</small></td><td class="num pos">+14.1%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/herramientas-juguete-madera" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">20</td><td><strong>Set Médico Infantil 14 Piezas</strong><br><small class="cat-tag">Imitación</small></td><td class="center">200</td><td class="num">U$S 3.50</td><td class="num fob-act">U$S 3.75</td><td class="num">U$S 4.25</td><td class="num">U$S 3.35</td><td class="num highlight-dep">U$S 7.60</td><td class="num">U$S 10.26</td><td class="num">U$S 14.88</td><td class="num price-meli">U$S 26.78<br><small>$39,502</small></td><td class="num">U$S 23.05<br><small>$34,000</small></td><td class="num pos">+16.2%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/set-medico-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">21</td><td><strong>Pelopincho Inflable Familiar 180x180cm</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">100</td><td class="num">U$S 9.50</td><td class="num fob-act">U$S 10.17</td><td class="num">U$S 11.54</td><td class="num">U$S 9.09</td><td class="num highlight-dep">U$S 20.63</td><td class="num">U$S 27.85</td><td class="num">U$S 40.38</td><td class="num price-meli">U$S 72.69<br><small>$107,219</small></td><td class="num">U$S 65.08<br><small>$96,000</small></td><td class="num pos">+11.7%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/wholesale-inflatable-toy.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/pelopincho-inflable-familiar" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">22</td><td><strong>Tobogán Plástico Jardín Infantil</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">50</td><td class="num">U$S 17.00</td><td class="num fob-act">U$S 18.19</td><td class="num">U$S 20.65</td><td class="num">U$S 16.27</td><td class="num highlight-dep">U$S 36.92</td><td class="num">U$S 49.84</td><td class="num">U$S 72.27</td><td class="num price-meli">U$S 130.08<br><small>$191,866</small></td><td class="num">U$S 131.19<br><small>$193,500</small></td><td class="num neg">-0.8%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/tobogan-jardin-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">23</td><td><strong>Triciclo con Manija Parental hasta 3 años</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">30</td><td class="num">U$S 19.00</td><td class="num fob-act">U$S 20.33</td><td class="num">U$S 23.07</td><td class="num">U$S 18.19</td><td class="num highlight-dep">U$S 41.26</td><td class="num">U$S 55.70</td><td class="num">U$S 80.77</td><td class="num price-meli">U$S 145.38<br><small>$214,439</small></td><td class="num">U$S 147.12<br><small>$217,000</small></td><td class="num neg">-1.2%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/triciclo-manija-parental" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">24</td><td><strong>Bicicleta Rodado 12 con Rueditas Auxiliares</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">20</td><td class="num">U$S 24.00</td><td class="num fob-act">U$S 25.68</td><td class="num">U$S 29.15</td><td class="num">U$S 22.97</td><td class="num highlight-dep">U$S 52.12</td><td class="num">U$S 70.36</td><td class="num">U$S 102.02</td><td class="num price-meli">U$S 183.64<br><small>$270,870</small></td><td class="num">U$S 186.44<br><small>$275,000</small></td><td class="num neg">-1.5%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/bicicleta-rodado-12-rueditas" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-verde"><td class="center">25</td><td><strong>Bicicleta Rodado 16 c/Accesorios</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">20</td><td class="num">U$S 30.00</td><td class="num fob-act">U$S 32.10</td><td class="num">U$S 36.43</td><td class="num">U$S 28.72</td><td class="num highlight-dep">U$S 65.15</td><td class="num">U$S 87.95</td><td class="num">U$S 127.53</td><td class="num price-meli">U$S 229.55<br><small>$338,588</small></td><td class="num">U$S 235.25<br><small>$347,000</small></td><td class="num neg">-2.4%</td><td class="center"><span class="badge verde">&#127922; VERDE</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/bicicleta-rodado-16-accesorios" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">26</td><td><strong>Patineta Infantil Aluminio y Madera</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">100</td><td class="num">U$S 5.50</td><td class="num fob-act">U$S 5.89</td><td class="num">U$S 6.68</td><td class="num">U$S 5.26</td><td class="num highlight-dep">U$S 11.94</td><td class="num">U$S 16.12</td><td class="num">U$S 23.38</td><td class="num price-meli">U$S 42.08<br><small>$62,074</small></td><td class="num">U$S 34.24<br><small>$50,500</small></td><td class="num pos">+22.9%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/patineta-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-rojo"><td class="center">27</td><td><strong>Pelota Saltarina Asa Hopper Ball 55cm</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">200</td><td class="num">U$S 3.80</td><td class="num fob-act">U$S 4.07</td><td class="num">U$S 4.61</td><td class="num">U$S 3.64</td><td class="num highlight-dep">U$S 8.25</td><td class="num">U$S 11.14</td><td class="num">U$S 16.15</td><td class="num price-meli">U$S 29.08<br><small>$42,888</small></td><td class="num">U$S 22.03<br><small>$32,500</small></td><td class="num pos">+32.0%</td><td class="center"><span class="badge rojo">&#128308; ROJO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/wholesale-inflatable-toy.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/pelota-saltarina-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">28</td><td><strong>Arco de Fútbol Plegable Set x2</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">100</td><td class="num">U$S 6.00</td><td class="num fob-act">U$S 6.42</td><td class="num">U$S 7.29</td><td class="num">U$S 5.74</td><td class="num highlight-dep">U$S 13.03</td><td class="num">U$S 17.59</td><td class="num">U$S 25.51</td><td class="num price-meli">U$S 45.91<br><small>$67,718</small></td><td class="num">U$S 38.31<br><small>$56,500</small></td><td class="num pos">+19.9%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/arco-futbol-plegable-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">29</td><td><strong>Pistola Burbujas Eléctrica Automática</strong><br><small class="cat-tag">Outdoor</small></td><td class="center">300</td><td class="num">U$S 2.80</td><td class="num fob-act">U$S 3.00</td><td class="num">U$S 3.40</td><td class="num">U$S 2.68</td><td class="num highlight-dep">U$S 6.08</td><td class="num">U$S 8.21</td><td class="num">U$S 11.90</td><td class="num price-meli">U$S 21.42<br><small>$31,602</small></td><td class="num">U$S 21.02<br><small>$31,000</small></td><td class="num pos">+1.9%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/pistola-burbujas-electrica" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+<tr class="row-amarillo"><td class="center">30</td><td><strong>Set Pinturas Arte 36 Colores Premium</strong><br><small class="cat-tag">Arte</small></td><td class="center">200</td><td class="num">U$S 3.20</td><td class="num fob-act">U$S 3.42</td><td class="num">U$S 3.89</td><td class="num">U$S 3.06</td><td class="num highlight-dep">U$S 6.95</td><td class="num">U$S 9.38</td><td class="num">U$S 13.60</td><td class="num price-meli">U$S 24.49<br><small>$36,116</small></td><td class="num">U$S 21.02<br><small>$31,000</small></td><td class="num pos">+16.5%</td><td class="center"><span class="badge amarillo">&#127921; AMARILLO</span></td><td class="center"><a href="https://www.alibaba.com/showroom/toys.html" target="_blank" class="link-btn ali">Alibaba</a><br><a href="https://listado.mercadolibre.com.ar/set-pinturas-arte-ninos" target="_blank" class="link-btn meli">MeLi</a></td></tr>
+
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- DETALLE COSTOS -->
+<div class="section">
+<h2>&#128269; Desglose Completo Costos de Importacion por Unidad</h2>
+<div class="tbl-wrap">
+<table>
+<thead>
+<tr>
+<th>#</th><th style="min-width:170px;">Articulo</th>
+<th>FOB Act.</th><th>Flete<br>13%</th><th>Seguro<br>0,5%</th><th>CIF</th>
+<th>Arancel<br>20%</th><th>T.Est.<br>3%</th><th>Aduana<br>1,5%</th>
+<th class="recup" style="background:#f5f3ff;">IVA<br>21%</th>
+<th class="recup" style="background:#f5f3ff;">IVA Ad.<br>10,5%</th>
+<th class="recup" style="background:#f5f3ff;">Gcias<br>6%</th>
+<th class="recup" style="background:#f5f3ff;">IIBB<br>3%</th>
+<th>Dep.Fisc.<br>2,5%</th><th>Flete Dep.<br>2%</th>
+<th style="background:#dbeafe;">VALOR<br>DEPOSITO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-verde"><td class="center">1</td><td><strong>Auto RC 1:18 4WD con Luces LED</strong></td><td class="num">U$S 8.03</td><td class="num">U$S 1.04</td><td class="num">U$S 0.04</td><td class="num">U$S 9.11</td><td class="num">U$S 1.82</td><td class="num">U$S 0.27</td><td class="num">U$S 0.14</td><td class="num recup">U$S 2.35</td><td class="num recup">U$S 1.18</td><td class="num recup">U$S 0.67</td><td class="num recup">U$S 0.34</td><td class="num">U$S 0.23</td><td class="num">U$S 0.18</td><td class="num highlight-dep">U$S 16.29</td></tr>
+<tr class="row-amarillo"><td class="center">2</td><td><strong>Helicóptero RC 4 Canales con Giroscopio</strong></td><td class="num">U$S 5.89</td><td class="num">U$S 0.77</td><td class="num">U$S 0.03</td><td class="num">U$S 6.68</td><td class="num">U$S 1.34</td><td class="num">U$S 0.20</td><td class="num">U$S 0.10</td><td class="num recup">U$S 1.73</td><td class="num recup">U$S 0.86</td><td class="num recup">U$S 0.49</td><td class="num recup">U$S 0.25</td><td class="num">U$S 0.17</td><td class="num">U$S 0.13</td><td class="num highlight-dep">U$S 11.94</td></tr>
+<tr class="row-verde"><td class="center">3</td><td><strong>Drone Mini Plegable para Niños</strong></td><td class="num">U$S 7.28</td><td class="num">U$S 0.95</td><td class="num">U$S 0.04</td><td class="num">U$S 8.26</td><td class="num">U$S 1.65</td><td class="num">U$S 0.25</td><td class="num">U$S 0.12</td><td class="num recup">U$S 2.13</td><td class="num recup">U$S 1.07</td><td class="num recup">U$S 0.61</td><td class="num recup">U$S 0.30</td><td class="num">U$S 0.21</td><td class="num">U$S 0.17</td><td class="num highlight-dep">U$S 14.77</td></tr>
+<tr class="row-amarillo"><td class="center">4</td><td><strong>Robot Interactivo Programable Educativo</strong></td><td class="num">U$S 12.84</td><td class="num">U$S 1.67</td><td class="num">U$S 0.06</td><td class="num">U$S 14.57</td><td class="num">U$S 2.91</td><td class="num">U$S 0.44</td><td class="num">U$S 0.22</td><td class="num recup">U$S 3.76</td><td class="num recup">U$S 1.88</td><td class="num recup">U$S 1.08</td><td class="num recup">U$S 0.54</td><td class="num">U$S 0.36</td><td class="num">U$S 0.29</td><td class="num highlight-dep">U$S 26.06</td></tr>
+<tr class="row-amarillo"><td class="center">5</td><td><strong>Bloques Magnéticos Construcción 100 Piezas</strong></td><td class="num">U$S 9.10</td><td class="num">U$S 1.18</td><td class="num">U$S 0.04</td><td class="num">U$S 10.32</td><td class="num">U$S 2.06</td><td class="num">U$S 0.31</td><td class="num">U$S 0.15</td><td class="num recup">U$S 2.67</td><td class="num recup">U$S 1.33</td><td class="num recup">U$S 0.76</td><td class="num recup">U$S 0.38</td><td class="num">U$S 0.26</td><td class="num">U$S 0.21</td><td class="num highlight-dep">U$S 18.46</td></tr>
+<tr class="row-amarillo"><td class="center">6</td><td><strong>Bloques Encastre 200 Piezas + Ruedas</strong></td><td class="num">U$S 5.35</td><td class="num">U$S 0.70</td><td class="num">U$S 0.03</td><td class="num">U$S 6.07</td><td class="num">U$S 1.21</td><td class="num">U$S 0.18</td><td class="num">U$S 0.09</td><td class="num recup">U$S 1.57</td><td class="num recup">U$S 0.78</td><td class="num recup">U$S 0.45</td><td class="num recup">U$S 0.22</td><td class="num">U$S 0.15</td><td class="num">U$S 0.12</td><td class="num highlight-dep">U$S 10.86</td></tr>
+<tr class="row-amarillo"><td class="center">7</td><td><strong>Set STEM Engranajes y Construcción 60 Pzas</strong></td><td class="num">U$S 4.82</td><td class="num">U$S 0.63</td><td class="num">U$S 0.02</td><td class="num">U$S 5.47</td><td class="num">U$S 1.09</td><td class="num">U$S 0.16</td><td class="num">U$S 0.08</td><td class="num recup">U$S 1.41</td><td class="num recup">U$S 0.71</td><td class="num recup">U$S 0.40</td><td class="num recup">U$S 0.20</td><td class="num">U$S 0.14</td><td class="num">U$S 0.11</td><td class="num highlight-dep">U$S 9.77</td></tr>
+<tr class="row-verde"><td class="center">8</td><td><strong>Peluche Kawaii Tipo Labubu 25cm</strong></td><td class="num">U$S 3.75</td><td class="num">U$S 0.49</td><td class="num">U$S 0.02</td><td class="num">U$S 4.25</td><td class="num">U$S 0.85</td><td class="num">U$S 0.13</td><td class="num">U$S 0.06</td><td class="num recup">U$S 1.10</td><td class="num recup">U$S 0.55</td><td class="num recup">U$S 0.31</td><td class="num recup">U$S 0.16</td><td class="num">U$S 0.11</td><td class="num">U$S 0.09</td><td class="num highlight-dep">U$S 7.60</td></tr>
+<tr class="row-verde"><td class="center">9</td><td><strong>Peluche Baby Shark 30cm con Sonido</strong></td><td class="num">U$S 4.49</td><td class="num">U$S 0.58</td><td class="num">U$S 0.02</td><td class="num">U$S 5.10</td><td class="num">U$S 1.02</td><td class="num">U$S 0.15</td><td class="num">U$S 0.08</td><td class="num recup">U$S 1.32</td><td class="num recup">U$S 0.66</td><td class="num recup">U$S 0.38</td><td class="num recup">U$S 0.19</td><td class="num">U$S 0.13</td><td class="num">U$S 0.10</td><td class="num highlight-dep">U$S 9.12</td></tr>
+<tr class="row-amarillo"><td class="center">10</td><td><strong>Muñeca Bebé Reborn 49cm + Accesorios</strong></td><td class="num">U$S 5.89</td><td class="num">U$S 0.77</td><td class="num">U$S 0.03</td><td class="num">U$S 6.68</td><td class="num">U$S 1.34</td><td class="num">U$S 0.20</td><td class="num">U$S 0.10</td><td class="num recup">U$S 1.73</td><td class="num recup">U$S 0.86</td><td class="num recup">U$S 0.49</td><td class="num recup">U$S 0.25</td><td class="num">U$S 0.17</td><td class="num">U$S 0.13</td><td class="num highlight-dep">U$S 11.94</td></tr>
+<tr class="row-amarillo"><td class="center">11</td><td><strong>Casa Muñecas Plegable + 30 Accesorios</strong></td><td class="num">U$S 14.98</td><td class="num">U$S 1.95</td><td class="num">U$S 0.07</td><td class="num">U$S 17.00</td><td class="num">U$S 3.40</td><td class="num">U$S 0.51</td><td class="num">U$S 0.26</td><td class="num recup">U$S 4.39</td><td class="num recup">U$S 2.20</td><td class="num recup">U$S 1.25</td><td class="num recup">U$S 0.63</td><td class="num">U$S 0.43</td><td class="num">U$S 0.34</td><td class="num highlight-dep">U$S 30.40</td></tr>
+<tr class="row-amarillo"><td class="center">12</td><td><strong>Figura Acción Superhéroe 30cm Articulada</strong></td><td class="num">U$S 4.07</td><td class="num">U$S 0.53</td><td class="num">U$S 0.02</td><td class="num">U$S 4.61</td><td class="num">U$S 0.92</td><td class="num">U$S 0.14</td><td class="num">U$S 0.07</td><td class="num recup">U$S 1.19</td><td class="num recup">U$S 0.60</td><td class="num recup">U$S 0.34</td><td class="num recup">U$S 0.17</td><td class="num">U$S 0.12</td><td class="num">U$S 0.09</td><td class="num highlight-dep">U$S 8.25</td></tr>
+<tr class="row-verde"><td class="center">13</td><td><strong>Set Dinosaurios 12 Figuras Realistas</strong></td><td class="num">U$S 4.82</td><td class="num">U$S 0.63</td><td class="num">U$S 0.02</td><td class="num">U$S 5.47</td><td class="num">U$S 1.09</td><td class="num">U$S 0.16</td><td class="num">U$S 0.08</td><td class="num recup">U$S 1.41</td><td class="num recup">U$S 0.71</td><td class="num recup">U$S 0.40</td><td class="num recup">U$S 0.20</td><td class="num">U$S 0.14</td><td class="num">U$S 0.11</td><td class="num highlight-dep">U$S 9.77</td></tr>
+<tr class="row-amarillo"><td class="center">14</td><td><strong>Set Animales Granja 12 Figuras</strong></td><td class="num">U$S 3.42</td><td class="num">U$S 0.45</td><td class="num">U$S 0.02</td><td class="num">U$S 3.89</td><td class="num">U$S 0.78</td><td class="num">U$S 0.12</td><td class="num">U$S 0.06</td><td class="num recup">U$S 1.00</td><td class="num recup">U$S 0.50</td><td class="num recup">U$S 0.29</td><td class="num recup">U$S 0.14</td><td class="num">U$S 0.10</td><td class="num">U$S 0.08</td><td class="num highlight-dep">U$S 6.95</td></tr>
+<tr class="row-amarillo"><td class="center">15</td><td><strong>Jenga Madera Natural 54 Piezas XL</strong></td><td class="num">U$S 3.42</td><td class="num">U$S 0.45</td><td class="num">U$S 0.02</td><td class="num">U$S 3.89</td><td class="num">U$S 0.78</td><td class="num">U$S 0.12</td><td class="num">U$S 0.06</td><td class="num recup">U$S 1.00</td><td class="num recup">U$S 0.50</td><td class="num recup">U$S 0.29</td><td class="num recup">U$S 0.14</td><td class="num">U$S 0.10</td><td class="num">U$S 0.08</td><td class="num highlight-dep">U$S 6.95</td></tr>
+<tr class="row-amarillo"><td class="center">16</td><td><strong>Juego Memoria Cartas 48 Pares Educativo</strong></td><td class="num">U$S 2.35</td><td class="num">U$S 0.31</td><td class="num">U$S 0.01</td><td class="num">U$S 2.67</td><td class="num">U$S 0.53</td><td class="num">U$S 0.08</td><td class="num">U$S 0.04</td><td class="num recup">U$S 0.69</td><td class="num recup">U$S 0.35</td><td class="num recup">U$S 0.20</td><td class="num recup">U$S 0.10</td><td class="num">U$S 0.07</td><td class="num">U$S 0.05</td><td class="num highlight-dep">U$S 4.78</td></tr>
+<tr class="row-amarillo"><td class="center">17</td><td><strong>Puzzle 100 Piezas Personajes Infantiles</strong></td><td class="num">U$S 2.14</td><td class="num">U$S 0.28</td><td class="num">U$S 0.01</td><td class="num">U$S 2.43</td><td class="num">U$S 0.49</td><td class="num">U$S 0.07</td><td class="num">U$S 0.04</td><td class="num recup">U$S 0.63</td><td class="num recup">U$S 0.31</td><td class="num recup">U$S 0.18</td><td class="num recup">U$S 0.09</td><td class="num">U$S 0.06</td><td class="num">U$S 0.05</td><td class="num highlight-dep">U$S 4.34</td></tr>
+<tr class="row-amarillo"><td class="center">18</td><td><strong>Set Cocina Infantil 15 Accesorios</strong></td><td class="num">U$S 6.96</td><td class="num">U$S 0.90</td><td class="num">U$S 0.04</td><td class="num">U$S 7.89</td><td class="num">U$S 1.58</td><td class="num">U$S 0.24</td><td class="num">U$S 0.12</td><td class="num recup">U$S 2.04</td><td class="num recup">U$S 1.02</td><td class="num recup">U$S 0.58</td><td class="num recup">U$S 0.29</td><td class="num">U$S 0.20</td><td class="num">U$S 0.16</td><td class="num highlight-dep">U$S 14.12</td></tr>
+<tr class="row-amarillo"><td class="center">19</td><td><strong>Set Herramientas Infantil Madera 10 Pzas</strong></td><td class="num">U$S 4.82</td><td class="num">U$S 0.63</td><td class="num">U$S 0.02</td><td class="num">U$S 5.47</td><td class="num">U$S 1.09</td><td class="num">U$S 0.16</td><td class="num">U$S 0.08</td><td class="num recup">U$S 1.41</td><td class="num recup">U$S 0.71</td><td class="num recup">U$S 0.40</td><td class="num recup">U$S 0.20</td><td class="num">U$S 0.14</td><td class="num">U$S 0.11</td><td class="num highlight-dep">U$S 9.77</td></tr>
+<tr class="row-amarillo"><td class="center">20</td><td><strong>Set Médico Infantil 14 Piezas</strong></td><td class="num">U$S 3.75</td><td class="num">U$S 0.49</td><td class="num">U$S 0.02</td><td class="num">U$S 4.25</td><td class="num">U$S 0.85</td><td class="num">U$S 0.13</td><td class="num">U$S 0.06</td><td class="num recup">U$S 1.10</td><td class="num recup">U$S 0.55</td><td class="num recup">U$S 0.31</td><td class="num recup">U$S 0.16</td><td class="num">U$S 0.11</td><td class="num">U$S 0.09</td><td class="num highlight-dep">U$S 7.60</td></tr>
+<tr class="row-amarillo"><td class="center">21</td><td><strong>Pelopincho Inflable Familiar 180x180cm</strong></td><td class="num">U$S 10.17</td><td class="num">U$S 1.32</td><td class="num">U$S 0.05</td><td class="num">U$S 11.54</td><td class="num">U$S 2.31</td><td class="num">U$S 0.35</td><td class="num">U$S 0.17</td><td class="num recup">U$S 2.98</td><td class="num recup">U$S 1.49</td><td class="num recup">U$S 0.85</td><td class="num recup">U$S 0.43</td><td class="num">U$S 0.29</td><td class="num">U$S 0.23</td><td class="num highlight-dep">U$S 20.63</td></tr>
+<tr class="row-verde"><td class="center">22</td><td><strong>Tobogán Plástico Jardín Infantil</strong></td><td class="num">U$S 18.19</td><td class="num">U$S 2.36</td><td class="num">U$S 0.09</td><td class="num">U$S 20.65</td><td class="num">U$S 4.13</td><td class="num">U$S 0.62</td><td class="num">U$S 0.31</td><td class="num recup">U$S 5.33</td><td class="num recup">U$S 2.67</td><td class="num recup">U$S 1.52</td><td class="num recup">U$S 0.76</td><td class="num">U$S 0.52</td><td class="num">U$S 0.41</td><td class="num highlight-dep">U$S 36.92</td></tr>
+<tr class="row-verde"><td class="center">23</td><td><strong>Triciclo con Manija Parental hasta 3 años</strong></td><td class="num">U$S 20.33</td><td class="num">U$S 2.64</td><td class="num">U$S 0.10</td><td class="num">U$S 23.07</td><td class="num">U$S 4.61</td><td class="num">U$S 0.69</td><td class="num">U$S 0.35</td><td class="num recup">U$S 5.96</td><td class="num recup">U$S 2.98</td><td class="num recup">U$S 1.70</td><td class="num recup">U$S 0.85</td><td class="num">U$S 0.58</td><td class="num">U$S 0.46</td><td class="num highlight-dep">U$S 41.26</td></tr>
+<tr class="row-verde"><td class="center">24</td><td><strong>Bicicleta Rodado 12 con Rueditas Auxiliares</strong></td><td class="num">U$S 25.68</td><td class="num">U$S 3.34</td><td class="num">U$S 0.13</td><td class="num">U$S 29.15</td><td class="num">U$S 5.83</td><td class="num">U$S 0.87</td><td class="num">U$S 0.44</td><td class="num recup">U$S 7.53</td><td class="num recup">U$S 3.76</td><td class="num recup">U$S 2.15</td><td class="num recup">U$S 1.08</td><td class="num">U$S 0.73</td><td class="num">U$S 0.58</td><td class="num highlight-dep">U$S 52.12</td></tr>
+<tr class="row-verde"><td class="center">25</td><td><strong>Bicicleta Rodado 16 c/Accesorios</strong></td><td class="num">U$S 32.10</td><td class="num">U$S 4.17</td><td class="num">U$S 0.16</td><td class="num">U$S 36.43</td><td class="num">U$S 7.29</td><td class="num">U$S 1.09</td><td class="num">U$S 0.55</td><td class="num recup">U$S 9.41</td><td class="num recup">U$S 4.71</td><td class="num recup">U$S 2.69</td><td class="num recup">U$S 1.34</td><td class="num">U$S 0.91</td><td class="num">U$S 0.73</td><td class="num highlight-dep">U$S 65.15</td></tr>
+<tr class="row-amarillo"><td class="center">26</td><td><strong>Patineta Infantil Aluminio y Madera</strong></td><td class="num">U$S 5.89</td><td class="num">U$S 0.77</td><td class="num">U$S 0.03</td><td class="num">U$S 6.68</td><td class="num">U$S 1.34</td><td class="num">U$S 0.20</td><td class="num">U$S 0.10</td><td class="num recup">U$S 1.73</td><td class="num recup">U$S 0.86</td><td class="num recup">U$S 0.49</td><td class="num recup">U$S 0.25</td><td class="num">U$S 0.17</td><td class="num">U$S 0.13</td><td class="num highlight-dep">U$S 11.94</td></tr>
+<tr class="row-rojo"><td class="center">27</td><td><strong>Pelota Saltarina Asa Hopper Ball 55cm</strong></td><td class="num">U$S 4.07</td><td class="num">U$S 0.53</td><td class="num">U$S 0.02</td><td class="num">U$S 4.61</td><td class="num">U$S 0.92</td><td class="num">U$S 0.14</td><td class="num">U$S 0.07</td><td class="num recup">U$S 1.19</td><td class="num recup">U$S 0.60</td><td class="num recup">U$S 0.34</td><td class="num recup">U$S 0.17</td><td class="num">U$S 0.12</td><td class="num">U$S 0.09</td><td class="num highlight-dep">U$S 8.25</td></tr>
+<tr class="row-amarillo"><td class="center">28</td><td><strong>Arco de Fútbol Plegable Set x2</strong></td><td class="num">U$S 6.42</td><td class="num">U$S 0.83</td><td class="num">U$S 0.03</td><td class="num">U$S 7.29</td><td class="num">U$S 1.46</td><td class="num">U$S 0.22</td><td class="num">U$S 0.11</td><td class="num recup">U$S 1.88</td><td class="num recup">U$S 0.94</td><td class="num recup">U$S 0.54</td><td class="num recup">U$S 0.27</td><td class="num">U$S 0.18</td><td class="num">U$S 0.15</td><td class="num highlight-dep">U$S 13.03</td></tr>
+<tr class="row-amarillo"><td class="center">29</td><td><strong>Pistola Burbujas Eléctrica Automática</strong></td><td class="num">U$S 3.00</td><td class="num">U$S 0.39</td><td class="num">U$S 0.01</td><td class="num">U$S 3.40</td><td class="num">U$S 0.68</td><td class="num">U$S 0.10</td><td class="num">U$S 0.05</td><td class="num recup">U$S 0.88</td><td class="num recup">U$S 0.44</td><td class="num recup">U$S 0.25</td><td class="num recup">U$S 0.13</td><td class="num">U$S 0.09</td><td class="num">U$S 0.07</td><td class="num highlight-dep">U$S 6.08</td></tr>
+<tr class="row-amarillo"><td class="center">30</td><td><strong>Set Pinturas Arte 36 Colores Premium</strong></td><td class="num">U$S 3.42</td><td class="num">U$S 0.45</td><td class="num">U$S 0.02</td><td class="num">U$S 3.89</td><td class="num">U$S 0.78</td><td class="num">U$S 0.12</td><td class="num">U$S 0.06</td><td class="num recup">U$S 1.00</td><td class="num recup">U$S 0.50</td><td class="num recup">U$S 0.29</td><td class="num recup">U$S 0.14</td><td class="num">U$S 0.10</td><td class="num">U$S 0.08</td><td class="num highlight-dep">U$S 6.95</td></tr>
+
+</tbody>
+</table>
+</div>
+<div class="note">Columnas en violeta = creditos fiscales recuperables. Todos los valores en U$S por unidad importada.</div>
+</div>
+
+<!-- GRAFICOS -->
+<div class="section">
+<h2>&#128200; Analisis Grafico</h2>
+<div class="charts-grid">
+  <div class="chart-box">
+    <h3>Diferencia % Precio MeLi Propio vs. Precio Mercado</h3>
+    <canvas id="chartDiff" height="280"></canvas>
+  </div>
+  <div class="chart-box">
+    <h3>Distribucion de Articulos por Categoria</h3>
+    <canvas id="chartCat" height="280"></canvas>
+  </div>
+  <div class="chart-box" style="grid-column:span 2;">
+    <h3>Precio MeLi Propio (ARS) vs. Precio Mercado MeLi Actual &mdash; Todos los articulos</h3>
+    <canvas id="chartComp" height="130"></canvas>
+  </div>
+</div>
+</div>
+
+<!-- SEMAFOROS -->
+<div class="section">
+<h2>&#128678; Analisis Competitivo &mdash; Semaforos y Recomendaciones para mantener Gold MeLi</h2>
+<div class="cards" style="margin-bottom:18px;">
+  <div class="card c-green">
+    <div class="bnum">9</div>
+    <div class="blabel">&#127922; VERDE<br>Precio menor o igual al mercado<br>Publicar de inmediato</div>
+  </div>
+  <div class="card c-yellow">
+    <div class="bnum">20</div>
+    <div class="blabel">&#127921; AMARILLO<br>0% a 25% sobre mercado<br>Negociar FOB o ajustar margen</div>
+  </div>
+  <div class="card c-red">
+    <div class="bnum">1</div>
+    <div class="blabel">&#128308; ROJO<br>Mas de 25% sobre mercado<br>No viable sin renegociacion</div>
+  </div>
+  <div class="card" style="border-color:#f5a623;background:#fffbeb;">
+    <div class="bnum" style="font-size:22px;color:#92400e;">GOLD</div>
+    <div class="blabel">Requiere volumen sostenido<br>Rating &gt; 4,5 estrellas<br>Despacho en 24-48hs</div>
+  </div>
+</div>
+
+<h3 style="color:var(--navy);margin-bottom:12px;font-size:13px;">Articulos que requieren accion (ROJO + AMARILLO &gt;18%)</h3>
+<div class="rec-card rec-rojo"><div class="rec-head">&#128308; #27 &mdash; Pelota Saltarina Asa Hopper Ball 55cm</div><div class="rec-body"><p>Precio propio MeLi: <strong>$42,888</strong> | Mercado: <strong>$32,500</strong> | Diferencia: <strong>+32.0%</strong></p><p>&#128161; <strong>Accion recomendada:</strong> Renegociar FOB a U$S 3.07 (reduccion ~19.2%) o ajustar margen mayorista al 35%.</p></div></div>
+<div class="rec-card rec-amarillo"><div class="rec-head">&#127921; #7 &mdash; Set STEM Engranajes y Construcción 60 Pzas</div><div class="rec-body"><p>Precio propio MeLi: <strong>$50,788</strong> | Mercado: <strong>$43,000</strong> | Diferencia: <strong>+18.1%</strong></p><p>&#128161; <strong>Accion recomendada:</strong> Renegociar FOB a U$S 4.01 (reduccion ~10.9%) o ajustar margen mayorista al 35%.</p></div></div>
+<div class="rec-card rec-amarillo"><div class="rec-head">&#127921; #26 &mdash; Patineta Infantil Aluminio y Madera</div><div class="rec-body"><p>Precio propio MeLi: <strong>$62,074</strong> | Mercado: <strong>$50,500</strong> | Diferencia: <strong>+22.9%</strong></p><p>&#128161; <strong>Accion recomendada:</strong> Renegociar FOB a U$S 4.74 (reduccion ~13.7%) o ajustar margen mayorista al 35%.</p></div></div>
+<div class="rec-card rec-amarillo"><div class="rec-head">&#127921; #28 &mdash; Arco de Fútbol Plegable Set x2</div><div class="rec-body"><p>Precio propio MeLi: <strong>$67,718</strong> | Mercado: <strong>$56,500</strong> | Diferencia: <strong>+19.9%</strong></p><p>&#128161; <strong>Accion recomendada:</strong> Renegociar FOB a U$S 5.28 (reduccion ~11.9%) o ajustar margen mayorista al 35%.</p></div></div>
+
+
+<div class="note">
+  <strong>Estrategia Gold MeLi:</strong> Priorizar los 9 articulos VERDE con precio competitivo para generar volumen y mantener rating. 
+  Para los AMARILLO, evaluar reducir margen mayorista de 45% al 35% los primeros 3 meses para ganar posicion en ranking MeLi. 
+  Mantener stock suficiente en agosto para no quedar fuera de stock en la semana del Dia del Nino. 
+  Los precios MeLi calculados incluyen todos los costos (incluyendo IVA recuperable); si se excluye el IVA, los precios finales pueden reducirse ~8-12%, mejorando competitividad.
+</div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section">
+<h2>&#128197; Calendario de Escalabilidad &mdash; Importacion para Dia del Nino 16/08/2026</h2>
+<div style="display:flex;align-items:flex-start;gap:0;width:100%;overflow-x:auto;"><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#f5a623;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #f5a623;outline:4px solid rgba(245,166,35,0.4);"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">31 Mar 2026</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Analisis y decision<br>de compra</div></div></div><div style="height:3px;background:linear-gradient(90deg,#f5a623,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#3b82f6;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #3b82f6;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">7-14 Abr</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Contacto proveedores<br>Muestras y cotizaciones</div></div></div><div style="height:3px;background:linear-gradient(90deg,#3b82f6,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#8b5cf6;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #8b5cf6;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">21-28 Abr</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Confirmacion ordenes<br>Pago 30% adelanto</div></div></div><div style="height:3px;background:linear-gradient(90deg,#8b5cf6,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#f59e0b;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #f59e0b;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">Mayo 2026</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Produccion China<br>30-45 dias</div></div></div><div style="height:3px;background:linear-gradient(90deg,#f59e0b,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#f97316;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #f97316;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">1-10 Jun</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Embarque<br>Shanghai/Ningbo</div></div></div><div style="height:3px;background:linear-gradient(90deg,#f97316,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#22c55e;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #22c55e;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">10-15 Jul</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Arribo Puerto<br>Buenos Aires</div></div></div><div style="height:3px;background:linear-gradient(90deg,#22c55e,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#0ea5e9;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #0ea5e9;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">16-31 Jul</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Despacho aduanero<br>Ingreso deposito</div></div></div><div style="height:3px;background:linear-gradient(90deg,#0ea5e9,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#10b981;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #10b981;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">1-10 Ago</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">Distribucion<br>Activacion MeLi</div></div></div><div style="height:3px;background:linear-gradient(90deg,#10b981,#e8edf8);flex:1;min-width:15px;margin-top:10px;align-self:flex-start;"></div><div style="display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;"><div style="background:#ef4444;width:20px;height:20px;border-radius:50%;margin:0 auto;border:3px solid #fff;box-shadow:0 0 0 3px #ef4444;"></div><div style="text-align:center;padding:8px 2px 0;"><div style="font-weight:700;font-size:11px;color:#1e2d5a;">16 Ago 2026</div><div style="font-size:10px;color:#6b7280;margin-top:3px;line-height:1.4;">DIA DEL NINO<br>Fecha objetivo</div></div></div></div>
+<table style="margin-top:18px;max-width:780px;">
+<thead><tr><th>Escenario</th><th>Produccion China</th><th>Transito maritimo</th><th>Fecha limite orden</th><th>Estado</th></tr></thead>
+<tbody>
+<tr class="row-verde"><td>&#127922; Optimo</td><td>30 dias</td><td>28 dias</td><td>Hasta 15 Abril 2026</td><td>Margen 4 semanas extra</td></tr>
+<tr class="row-amarillo"><td>&#127921; Ajustado</td><td>40 dias</td><td>32 dias</td><td>Hasta 30 Abril 2026</td><td>Sin margen extra</td></tr>
+<tr class="row-rojo"><td>&#128308; Riesgo</td><td>45+ dias</td><td>35+ dias</td><td>Despues de 1 Mayo 2026</td><td>Alta probabilidad llegada tarde</td></tr>
+</tbody>
+</table>
+<div class="note" style="margin-top:10px;">&#9889; <strong>ACCION URGENTE:</strong> Hoy es 31 de Marzo 2026. Quedan <strong>15 dias habiles</strong> para confirmar ordenes en el escenario OPTIMO. Iniciar contacto con proveedores chinos esta semana para asegurar la ventana productiva de mayo.</div>
+</div>
+
+<!-- FUENTES -->
+<div class="section">
+<h2>&#128218; Fuentes de Informacion</h2>
+<table style="max-width:950px;">
+<thead><tr><th>Fuente</th><th>Descripcion</th><th>Datos utilizados</th><th>Link</th></tr></thead>
+<tbody>
+<tr><td>MercadoLibre Argentina</td><td>Mas vendidos jugueteria Mar-Ago 2025</td><td>Rankings ventas, precios actuales marzo 2026</td><td><a href="https://www.mercadolibre.com.ar/mas-vendidos/MLA455430" target="_blank">Ver &#8599;</a></td></tr>
+<tr><td>Nubimetrics Academia</td><td>Analisis Dia del Nino Argentina 2025</td><td>Rankings, %crecimiento, tendencias categoria</td><td><a href="https://academia.nubimetrics.com/dia-del-nino-argentina" target="_blank">Ver &#8599;</a></td></tr>
+<tr><td>El Cronista</td><td>5 regalos mas vendidos Dia del Nino 2025</td><td>Top productos, tendencias mercado</td><td><a href="https://www.cronista.com/informacion-gral/dia-del-nino-2025-cuales-son-los-5-regalos-mas-vendidos-en-mercado-libre/" target="_blank">Ver &#8599;</a></td></tr>
+<tr><td>Perfil.com</td><td>Ranking juguetes mas pedidos 2025</td><td>Tendencias y productos lideres</td><td><a href="https://www.perfil.com/noticias/sociedad/dia-del-nino-2025-el-ranking-de-juguetes-mas-pedidos-en-la-tienda-online.phtml" target="_blank">Ver &#8599;</a></td></tr>
+<tr><td>Alibaba.com</td><td>Cotizaciones FOB proveedores China</td><td>Precios FOB USD, MOQ por articulo</td><td><a href="https://www.alibaba.com/wholesale-toys-suppliers.html" target="_blank">Ver &#8599;</a></td></tr>
+<tr><td>Argentina.gob.ar</td><td>Decreto 781/2025 reduccion aranceles</td><td>DIE 20% NCM 9503, vigencia nov/2025</td><td><a href="https://www.argentina.gob.ar/noticias/el-gobierno-nacional-reduce-los-impuestos-de-importacion-de-juguetes" target="_blank">Ver &#8599;</a></td></tr>
+<tr><td>SAIJ/Boletin Oficial</td><td>Normativa arancelaria AFIP/MECON</td><td>Tasas IVA, Ganancias, IIBB importacion</td><td><a href="https://www.saij.gob.ar" target="_blank">Ver &#8599;</a></td></tr>
+</tbody>
+</table>
+</div>
+
+</div>
+
+<div class="footer">
+  Informe generado el 31/03/2026 | MICROBELL S.A. &mdash; Importadora Mayorista | CONFIDENCIAL<br>
+  TC referencia: 1 U$S = $1.475 ARS | Los precios FOB son estimaciones basadas en cotizaciones Alibaba 2025. Verificar con proveedores antes de confirmar ordenes.<br>
+  Precios MeLi: relevamiento mercado marzo 2026 (estimados). Semaforos calculados sobre base costo total incluyendo impuestos recuperables.
+</div>
+
+<script>
+const labels = ["Auto RC 1:18 4WD con Luces...", "Helic\u00f3ptero RC 4 Canales c...", "Drone Mini Plegable para N...", "Robot Interactivo Programa...", "Bloques Magn\u00e9ticos Constru...", "Bloques Encastre 200 Pieza...", "Set STEM Engranajes y Cons...", "Peluche Kawaii Tipo Labubu...", "Peluche Baby Shark 30cm co...", "Mu\u00f1eca Beb\u00e9 Reborn 49cm + ...", "Casa Mu\u00f1ecas Plegable + 30...", "Figura Acci\u00f3n Superh\u00e9roe 3...", "Set Dinosaurios 12 Figuras...", "Set Animales Granja 12 Fig...", "Jenga Madera Natural 54 Pi...", "Juego Memoria Cartas 48 Pa...", "Puzzle 100 Piezas Personaj...", "Set Cocina Infantil 15 Acc...", "Set Herramientas Infantil ...", "Set M\u00e9dico Infantil 14 Pie...", "Pelopincho Inflable Famili...", "Tobog\u00e1n Pl\u00e1stico Jard\u00edn In...", "Triciclo con Manija Parent...", "Bicicleta Rodado 12 con Ru...", "Bicicleta Rodado 16 c/Acce...", "Patineta Infantil Aluminio...", "Pelota Saltarina Asa Hoppe...", "Arco de F\u00fatbol Plegable Se...", "Pistola Burbujas El\u00e9ctrica...", "Set Pinturas Arte 36 Color..."];
+const meliPrices = [84647.0, 62074.0, 76747.0, 135435.0, 95933.0, 56431.0, 50788.0, 39502.0, 47402.0, 62074.0, 158008.0, 42888.0, 50788.0, 36116.0, 36116.0, 24830.0, 22573.0, 73361.0, 50788.0, 39502.0, 107219.0, 191866.0, 214439.0, 270870.0, 338588.0, 62074.0, 42888.0, 67718.0, 31602.0, 36116.0];
+const marketPrices = [88000, 62000, 79000, 118000, 95000, 53000, 43000, 45000, 53000, 62000, 143000, 40000, 52000, 35500, 31000, 22500, 19500, 65000, 44500, 34000, 96000, 193500, 217000, 275000, 347000, 50500, 32500, 56500, 31000, 31000];
+const diffs = [-3.8, 0.1, -2.9, 14.8, 1.0, 6.5, 18.1, -12.2, -10.6, 0.1, 10.5, 7.2, -2.3, 1.7, 16.5, 10.4, 15.8, 12.9, 14.1, 16.2, 11.7, -0.8, -1.2, -1.5, -2.4, 22.9, 32.0, 19.9, 1.9, 16.5];
+const barColors = ["#22c55e", "#f59e0b", "#22c55e", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#22c55e", "#22c55e", "#f59e0b", "#f59e0b", "#f59e0b", "#22c55e", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#f59e0b", "#22c55e", "#22c55e", "#22c55e", "#22c55e", "#f59e0b", "#ef4444", "#f59e0b", "#f59e0b", "#f59e0b"];
+const catLabels = ["Electr\u00f3nico/RC", "Construcci\u00f3n", "Peluche", "Mu\u00f1ecas", "Figuras", "Juegos Mesa", "Imitaci\u00f3n", "Outdoor", "Arte"];
+const catVals = [4, 3, 2, 2, 3, 3, 3, 9, 1];
+
+Chart.defaults.font.family = "Segoe UI, Arial, sans-serif";
+
+new Chart(document.getElementById('chartDiff'), {
+  type: 'bar', data: {labels, datasets: [{label:'Dif.%', data:diffs, backgroundColor:barColors, borderRadius:3}]},
+  options: {indexAxis:'y', responsive:true,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.x.toFixed(1)+'%'}}},
+    scales:{x:{grid:{color:'#e2e8f0'},ticks:{callback:v=>v+'%'},title:{display:true,text:'% diferencia vs mercado'}},
+             y:{ticks:{font:{size:9}}}}
+  }
+});
+
+new Chart(document.getElementById('chartCat'), {
+  type: 'doughnut',
+  data: {labels:catLabels, datasets:[{data:catVals,
+    backgroundColor:['#1e2d5a','#3b82f6','#8b5cf6','#22c55e','#f59e0b','#ef4444','#0ea5e9','#f97316','#10b981'],
+    borderWidth:2,borderColor:'#fff'}]},
+  options:{responsive:true,plugins:{legend:{position:'right',labels:{font:{size:11}}}}}
+});
+
+new Chart(document.getElementById('chartComp'), {
+  type:'bar',
+  data:{labels, datasets:[
+    {label:'Precio MeLi Propio (ARS)',data:meliPrices,backgroundColor:'rgba(52,131,250,0.75)',borderRadius:2},
+    {label:'Precio Mercado MeLi (ARS)',data:marketPrices,backgroundColor:'rgba(34,197,94,0.65)',borderRadius:2}
+  ]},
+  options:{responsive:true,
+    plugins:{legend:{position:'top'},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString('es-AR')}}},
+    scales:{x:{ticks:{font:{size:8},maxRotation:45}},y:{ticks:{callback:v=>'$'+v.toLocaleString('es-AR')}}}
+  }
+});
+</script>
+</body>
+</html>
